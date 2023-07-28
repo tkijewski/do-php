@@ -27,8 +27,10 @@ class HelloController extends Controller
      */
     public function actionIndex($message = 'hello world')
     {
-        echo $message . "\n";
+        while(true) {
+            echo $message . "\n";
+            sleep(10);
+        }
 
-        return ExitCode::OK;
     }
 }
