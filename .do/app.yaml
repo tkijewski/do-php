@@ -1,0 +1,8 @@
+name: do-php
+services:
+  - environment_slug: php
+    github:
+      branch: main
+      deploy_on_push: true
+      repo: tkijewski/do-php
+    name: do-php
