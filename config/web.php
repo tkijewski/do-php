@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$mongodb = require __DIR__ . '/mongodb.php';
 
 $config = [
     'id' => 'basic',
@@ -10,6 +11,11 @@ $config = [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+    ],
+    'modules' => [
+        'backend' => [
+            'class' => 'app\modules\backend\BackendModule',
+        ],
     ],
     'components' => [
         'request' => [
@@ -42,14 +48,13 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+        'mongodb'=>$mongodb,
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

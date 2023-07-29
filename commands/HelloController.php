@@ -7,6 +7,7 @@
 
 namespace app\commands;
 
+use app\models\Vendor;
 use yii\console\Controller;
 use yii\console\ExitCode;
 
@@ -27,10 +28,29 @@ class HelloController extends Controller
      */
     public function actionIndex($message = 'hello world')
     {
-        while(true) {
-            echo $message . "\n";
-            sleep(10);
-        }
 
+
+        $vendor = new Vendor();
+        $vendor->name = 'Tobi Keith';
+        $vendor->email = 'john.doe@example1.com';
+        $vendor->payouts = [
+            [
+                'time'=>time(),
+                'amount'=>100
+            ],
+            [
+                'time'=>time(),
+                'amount'=>200
+            ],
+            [
+                'time'=>time(),
+                'amount'=>300
+            ]
+        ];
+        $vendor->save();
+
+        $v = Vendor::find()->where(['email'=>'john.doe@example1.com'])->one();
+        $v->payouts = [];
+        $v->save();
     }
 }

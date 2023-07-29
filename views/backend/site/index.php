@@ -3,6 +3,44 @@
 /** @var yii\web\View $this */
 
 $this->title = 'My Yii Application';
+
+$dataProvider = new \yii\data\ActiveDataProvider([
+    'query' => \app\models\Vendor::find()->where(['name'=>'Tobi Keith']),
+    'pagination' => [
+        'pageSize' => 20,
+    ],
+]);
+
+?>
+<?=\yii\grid\GridView::widget([
+    'dataProvider' => $dataProvider,
+    'columns' => [
+        ['class' => 'yii\grid\SerialColumn'],
+        '_id',
+        'name',
+        'email',
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{view} {update} {delete}',
+            'buttons' => [
+                'view' => function ($url, $model) {
+                    return \yii\helpers\Html::a('<span class="glyphicon glyphicon-eye-open"></span>', ['user/view', 'id' => $model->_id]);
+                },
+                'update' => function ($url, $model) {
+                    return \yii\helpers\Html::a('<span class="glyphicon glyphicon-pencil"></span>', ['user/update', 'id' => $model->_id]);
+                },
+                'delete' => function ($url, $model) {
+                    return \yii\helpers\Html::a('<span class="glyphicon glyphicon-trash"></span>', ['user/delete', 'id' => $model->_id], [
+                        'data' => [
+                            'confirm' => 'Are you sure you want to delete this item?',
+                            'method' => 'post',
+                        ],
+                    ]);
+                },
+            ],
+        ],
+    ],
+]);
 ?>
 <div class="site-index">
 
