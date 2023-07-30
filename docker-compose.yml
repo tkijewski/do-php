@@ -1,7 +1,7 @@
-version: '2'
+version: '3'
 services:
   php:
-    container_name: discoretail-php
+    container_name: disco-php
     image: yiisoftware/yii2-php:8.1-fpm-nginx
     volumes:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
@@ -9,24 +9,24 @@ services:
     ports:
       - '8444:80'
     networks:
-      discoretail_public_net:
+      disco_public_net:
         ipv4_address: 192.168.47.50
   db:
-    container_name: discoretail-db
-    image: mysql:8.0.28
-    command: --default-authentication-plugin=mysql_native_password
+    container_name: disco-db
+    image: postgres:latest
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: example
-      MYSQL_DATABASE: discoretail_db
+      POSTGRES_DB: disco_db
+      POSTGRES_USER: disco
+      POSTGRES_PASSWORD: disco
     ports:
-      - 8010:3306
+      - 5432:5432
     networks:
-      discoretail_public_net:
+      disco_public_net:
         ipv4_address: 192.168.47.60
 networks:
-  discoretail_public_net:
-    name: discoretail_public_net
+  disco_public_net:
+    name: disco_public_net
     driver: bridge
     ipam:
       driver: default

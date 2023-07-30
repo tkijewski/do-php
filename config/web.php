@@ -16,6 +16,13 @@ $config = [
         'backend' => [
             'class' => 'app\modules\backend\BackendModule',
         ],
+        'user' => [
+            'class' => Da\User\Module::class,
+            // ...other configs from here: [Configuration Options](installation/configuration-options.md), e.g.
+            // 'administrators' => ['admin'], // this is required for accessing administrative actions
+            // 'generatePasswords' => true,
+            // 'switchIdentitySessionKey' => 'myown_usuario_admin_user_key',
+        ]
     ],
     'components' => [
         'request' => [
@@ -24,10 +31,6 @@ $config = [
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
-        ],
-        'user' => [
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

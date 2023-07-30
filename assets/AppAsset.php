@@ -24,9 +24,13 @@ class AppAsset extends AssetBundle
         'css/sb-admin.css'
     ];
     public $js = [
+        'js/sb.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap5\BootstrapAsset'
+        'yii\bootstrap5\BootstrapAsset',
+        'yii\bootstrap5\BootstrapPluginAsset',
+        'yii\bootstrap5\BootstrapIconAsset',
+        'rmrevin\yii\fontawesome\CdnFreeAssetBundle',
     ];
 }
