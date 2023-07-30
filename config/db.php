@@ -7,7 +7,7 @@ $dbname = $_ENV['DB_NAME'] ?? '';
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'pgsql:host='.$_ENV['DB_HOST'].';dbname='.$_ENV['DB_NAME'],
+    'dsn' => 'pgsql:host='.$_ENV['DB_HOST'].';port='.(@$_ENV['DB_PORT']?:5432).';dbname='.$_ENV['DB_NAME'],
     'username' => $_ENV['DB_USER'],
     'password' => $_ENV['DB_PASS'],
     'charset' => 'utf8',
