@@ -3,7 +3,7 @@
 if ($_ENV['ENV'] == 'dev') {
     $dsn = 'mongodb://'.$_ENV['MONGO_DB_HOST'];
 } else {
-    $dsn = 'mongodb+srv://'.$_ENV['MONGO_DB_HOST'];
+    $dsn = 'mongodb+srv://'.$_ENV['MONGO_DB_HOST'].'/?retryWrites=true&w=majority';
 }
 
 return
