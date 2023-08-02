@@ -11,6 +11,7 @@ $dataProvider = new \yii\data\ActiveDataProvider([
     ],
 ]);
 
+
 ?>
 <?=\yii\grid\GridView::widget([
     'dataProvider' => $dataProvider,
@@ -19,6 +20,12 @@ $dataProvider = new \yii\data\ActiveDataProvider([
         '_id',
         'name',
         'email',
+        [
+            'attribute'=>'payouts',
+            'value'=>function (\app\models\Vendor $m) {
+                return print_r($m->payouts,TRUE);
+            }
+        ],
         [
             'class' => 'yii\grid\ActionColumn',
             'template' => '{view} {update} {delete}',
