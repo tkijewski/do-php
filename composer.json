@@ -24,7 +24,8 @@
         "rmrevin/yii2-fontawesome": "~3.5",
         "twbs/bootstrap-icons": "^1.10",
         "npm-asset/feather-icons": "^4.29",
-        "2amigos/yii2-usuario": "dev-v2.0.0-dev"
+        "2amigos/yii2-usuario": "dev-v2.0.0-dev",
+        "yiisoft/yii2-queue": "^2.3"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

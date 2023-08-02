@@ -7,7 +7,7 @@ $mongodb = require __DIR__ . '/mongodb.php';
 $config = [
     'id' => 'basic-console',
     'basePath' => dirname(__DIR__),
-    'bootstrap' => ['log'],
+    'bootstrap' => ['log','queue'],
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
@@ -32,10 +32,17 @@ $config = [
             ],
             'migrationNamespaces' => [
                 'Da\User\Migration',
+                'yii\queue\db\migrations',
             ],
         ],
     ],
     'components' => [
+        'queue' => [
+            'class' => \yii\queue\db\Queue::class,
+            'mutex' => yii\mutex\PgsqlMutex::class,
+            //'as log' => \yii\queue\LogBehavior::class,
+            // Other driver options
+        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
