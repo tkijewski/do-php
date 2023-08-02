@@ -1,8 +1,109 @@
-name: do-php
+alerts:
+  - rule: DEPLOYMENT_FAILED
+  - rule: DOMAIN_FAILED
+databases:
+  - engine: PG
+    name: db
+    num_nodes: 1
+    size: basic-xs
+    version: "12"
+ingress:
+  rules:
+    - component:
+        name: do-php
+      match:
+        path:
+          prefix: /
+name: tester-do-app
+region: nyc
 services:
   - environment_slug: php
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${db.DATABASE_URL}
+      - key: MONGO_DB_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: discoretail.bgojtkx.mongodb.net
+      - key: MONGO_DB_USER
+        scope: RUN_AND_BUILD_TIME
+        value: discoretail
+      - key: MONGO_DB_PASS
+        scope: RUN_AND_BUILD_TIME
+        value: H0GnkNufO42UQBoO
+      - key: MONGO_DB_NAME
+        scope: RUN_AND_BUILD_TIME
+        value: DiscoRetail
+      - key: DB_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: ${db.HOSTNAME}
+      - key: DB_PORT
+        scope: RUN_AND_BUILD_TIME
+        value: ${db.PORT}
+      - key: DB_USER
+        scope: RUN_AND_BUILD_TIME
+        value: ${db.USERNAME}
+      - key: DB_PASS
+        scope: RUN_AND_BUILD_TIME
+        value: ${db.PASSWORD}
+      - key: ENV
+        scope: RUN_AND_BUILD_TIME
+        value: PROD
+      - key: DB_NAME
+        scope: RUN_AND_BUILD_TIME
+        value: db
     github:
-      branch: main
+      branch: master
       deploy_on_push: true
       repo: tkijewski/do-php
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
     name: do-php
+    run_command: vendor/bin/heroku-php-nginx -C nginx.conf web
+    source_dir: /
+workers:
+  - environment_slug: php
+    github:
+      branch: master
+      deploy_on_push: true
+      repo: tkijewski/do-php
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    name: php-worker
+    source_dir: /
+    run_command: 'php yii queue/listen --verbose'
+    envs:
+      - key: DATABASE_URL
+        scope: RUN_TIME
+        value: ${db.DATABASE_URL}
+      - key: MONGO_DB_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: discoretail.bgojtkx.mongodb.net
+      - key: MONGO_DB_USER
+        scope: RUN_AND_BUILD_TIME
+        value: discoretail
+      - key: MONGO_DB_PASS
+        scope: RUN_AND_BUILD_TIME
+        value: H0GnkNufO42UQBoO
+      - key: MONGO_DB_NAME
+        scope: RUN_AND_BUILD_TIME
+        value: DiscoRetail
+      - key: DB_HOST
+        scope: RUN_AND_BUILD_TIME
+        value: ${db.HOSTNAME}
+      - key: DB_PORT
+        scope: RUN_AND_BUILD_TIME
+        value: ${db.PORT}
+      - key: DB_USER
+        scope: RUN_AND_BUILD_TIME
+        value: ${db.USERNAME}
+      - key: DB_PASS
+        scope: RUN_AND_BUILD_TIME
+        value: ${db.PASSWORD}
+      - key: ENV
+        scope: RUN_AND_BUILD_TIME
+        value: PROD
+      - key: DB_NAME
+        scope: RUN_AND_BUILD_TIME
+        value: db
