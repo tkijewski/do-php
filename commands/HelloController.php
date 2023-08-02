@@ -28,29 +28,9 @@ class HelloController extends Controller
      */
     public function actionIndex($message = 'hello world')
     {
-
-
-        $vendor = new Vendor();
-        $vendor->name = 'Tobi Keith';
-        $vendor->email = 'john.doe@example1.com';
-        $vendor->payouts = [
-            [
-                'time'=>time(),
-                'amount'=>100
-            ],
-            [
-                'time'=>time(),
-                'amount'=>200
-            ],
-            [
-                'time'=>time(),
-                'amount'=>300
-            ]
-        ];
-        $vendor->save();
-
-        $v = Vendor::find()->where(['email'=>'john.doe@example1.com'])->one();
-        $v->payouts = [];
-        $v->save();
+        while (true) {
+            echo "hi";
+            sleep(10);
+        }
     }
 }
