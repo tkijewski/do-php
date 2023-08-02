@@ -8,7 +8,7 @@ class Vendor extends ActiveRecord
 {
     public static function collectionName()
     {
-        return ['DiscoRetail', 'vendor'];
+        return [$_ENV['MONGO_DB_NAME'], 'vendor'];
     }
 
     public function attributes()
